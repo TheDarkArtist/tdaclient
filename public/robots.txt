@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://thedarkartist.in
+
+# Sitemaps
+Sitemap: https://thedarkartist.in/sitemap.xml
