@@ -10,7 +10,7 @@ export const Meteors = ({
 }) => {
   const meteors = new Array(number || 20).fill(true);
   return (
-    <>
+    <div className="absolute overflow-hidden md:w-full h-full w-60">
       {meteors.map((el, idx) => (
         <span
           key={"meteor" + idx}
@@ -25,9 +25,8 @@ export const Meteors = ({
             animationDelay: Math.random() * (0.8 - 0.2) + 0.2 + "s",
             animationDuration: Math.floor(Math.random() * (10 - 2) + 2) + "s",
           }}
-        ></span>
+        />
       ))}
-    </>
+    </div>
   );
 };
-

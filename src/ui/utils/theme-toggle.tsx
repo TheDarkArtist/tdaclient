@@ -28,7 +28,7 @@ const ThemeToggle = () => {
   if (resolvedTheme === "light") {
     return (
       <LuMoon
-        className="dark:text-cyan-600 text-cyan-800 h-6 w-6"
+        className="dark:text-cyan-600 cursor-pointer text-cyan-800 h-6 w-6"
         onClick={() => setTheme("dark")}
       />
     );
@@ -37,7 +37,7 @@ const ThemeToggle = () => {
   if (resolvedTheme === "dark") {
     return (
       <LuSun
-        className="dark:text-cyan-600 text-cyan-800 h-6 w-6"
+        className="dark:text-cyan-600 cursor-pointer text-cyan-800 h-6 w-6"
         onClick={() => setTheme("light")}
       />
     );

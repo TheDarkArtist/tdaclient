@@ -17,12 +17,12 @@ const NavMenu = ({ isMenuOpen }: { isMenuOpen: boolean }) => {
           <div className="absolute rounded-2xl pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]" />
           <div className="z-10 p-4 w-full">
             <div>
-              <NavMenuProfile data={data as any } />
+              <NavMenuProfile data={data as any} />
             </div>
             {status !== "authenticated" ? (
               <button
                 className="w-full h-10 dark:bg-sky-950 rounded-xl"
-                onClick={() => signIn("google", { callbackUrl: "/" })}
+                onClick={() => signIn("google")}
               >
                 Sign In
               </button>

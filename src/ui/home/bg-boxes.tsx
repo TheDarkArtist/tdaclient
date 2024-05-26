@@ -21,7 +21,6 @@ export function BackgroundBoxes() {
         Read awesome project, article. Create your own. Share your insight with
         other.
       </p>
-      <Meteors number={50} />
     </div>
   );
 }

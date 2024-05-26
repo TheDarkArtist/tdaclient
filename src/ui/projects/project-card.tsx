@@ -8,7 +8,7 @@ import ProjectTag from "./project-tag";
 export function ProjectCard({ data }: { data: Project }) {
   return (
     <CardContainer className="inter-va h-full" containerClassName="h-full">
-      <CardBody className="bg-gray-200 relative cursor-pointer group/card  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-stone-600/[0.2] h-full w-full rounded-xl md:p-6 p-3 border  ">
+      <CardBody className="bg-white relative cursor-pointer group/card  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-stone-600/[0.2] h-full w-full rounded-xl md:p-6 p-3 border  ">
         <CardItem
           translateZ="50"
           className={`text-3xl font-bold text-neutral-600 dark:text-green-600`}

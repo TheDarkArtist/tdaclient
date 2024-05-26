@@ -1,17 +1,14 @@
-import { _getAll } from "@/lib/actions/articles";
-import { ArticleCard } from "@/ui/articles/article-card";
+import AllArticleList from "@/ui/articles/all-article-list";
 import { ArticleCreateBtn } from "@/ui/articles/article-create-btn";
 import ArticleHomeSidebar from "@/ui/articles/article-home-sidebar";
 import { ArticleSearch } from "@/ui/articles/article-search";
 import { SparklesCore } from "@/ui/utils/sparkles";
 import { TextGenerateEffect } from "@/ui/utils/text-generate-effect";
-import Link from "next/link";
 import React from "react";
 
 const page = async () => {
-  const projects = await _getAll();
   return (
-    <div className="flex justify-center p-4 gap-4 min-w-full pt-24 dark:bg-dot-cyan-600/[0.4] bg-grid-black/[0.1] overflow-hidden">
+    <div className="flex justify-center p-4 gap-4 min-w-full pt-24 dark:bg-dot-cyan-600/[0.4] bg-dot-black/[0.4] overflow-hidden">
       <div className="w-full md:max-w-[60rem]">
         <div className="pb-4">
           <SparklesCore
@@ -40,13 +37,7 @@ const page = async () => {
         <div className="flex justify-end my-4 w-full">
           <ArticleCreateBtn />
         </div>
-        <div className="grid gap-4 md:grid-cols-1 ">
-          {projects.map((data) => (
-            <Link key={data.id} href={`/articles/${data.id}`}>
-              <ArticleCard key={data.id} data={data} />
-            </Link>
-          ))}
-        </div>
+        <AllArticleList />
       </div>
       <ArticleHomeSidebar />
     </div>

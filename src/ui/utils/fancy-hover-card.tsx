@@ -33,7 +33,7 @@ export const EvervaultCard = ({
   }
 
   return (
-    <div className="md:mr-4 md:my-4 border dark:border-stone-800 border-gray-200 rounded-3xl m-4 bg-white dark:bg-black">
+    <div className="border dark:border-stone-800 border-gray-200 rounded-3xl bg-white dark:bg-black">
       <div
         className={cn(
           " bg-transparent aspect-square  flex items-center justify-center w-full h-ful relative ",

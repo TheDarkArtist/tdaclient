@@ -1,52 +1,37 @@
 import { _latestArticles } from "@/lib/actions/articles";
 import { _latestProjects } from "@/lib/actions/projects";
-import { BackgroundBoxes } from "@/ui/home/bg-boxes";
-import { ContactForm } from "@/ui/home/contact-form";
 import { GeminiEffect } from "@/ui/home/gemini-effect";
 import { HomeGrid } from "@/ui/home/home-grid";
 import LatestList from "@/ui/home/latest-list";
-import { MovingCards } from "@/ui/home/moving-cards";
-import { StickyScrollReveal } from "@/ui/home/scroll-reveal";
-import { TextRevealCardPreview } from "@/ui/home/text-reveal";
 import { EvervaultCard } from "@/ui/utils/fancy-hover-card";
-import TypingEffect from "@/ui/utils/typing-effect";
+import { Meteors } from "@/ui/utils/meteor";
 
 export default async function Home() {
-  const projects = await _latestProjects();
-  const articles = await _latestArticles();
   return (
-    <div className="min-h-full w-full flex md:flex-col flex-col  dark:bg-dot-white/[0.2] bg-dot-black/[0.4] overflow-hidden">
-      <div className="absolute z-20 w-full h-[24rem]">
-        <div>
-          <BackgroundBoxes />
+    <div className="w-full flex md:flex-col flex-col overflow-hidden bg-grid-cyan-600/[.2]">
+      <Meteors className="z-20" />
+      <div>
+        <div className="flex justify-center items-center flex-col bg-transparent bg-dot-cyan-800 dark:bg-dot-cyan-600 absolute h-60 top-20 z-20 w-full">
+          <h1 className="bg-clip-text text-transparent bg-gradient-to-b from-green-600 to-green-800 text-5xl md:text-7xl text-green-600 font-bold">
+            Welcome
+          </h1>
+          <p className=" text-center font-bold dark:bg-black bg-white md:text-lg text-sky-600">
+            Accept who you are and you can become who you want to be.
+          </p>
         </div>
-      </div>
-      <div className="">
-        <GeminiEffect />
-      </div>
-      <div className="flex md:flex-row flex-col-reverse w-full">
-        <div className="md:max-w-[75vw] overflow-hidden p-4">
-          <HomeGrid />
-          <MovingCards />
+        <div className="bg-white my-4">
+          <GeminiEffect />
         </div>
-        <div className="md:w-[25vw] space-y-4">
-          <div className="p-4 bg-white/[.6] dark:backdrop-filter dark:bg-cyan-950 dark:bg-opacity-40 dark:text-cyan-600 dark:backdrop-blur-sm rounded-md m-4">
-            <TypingEffect text="W elcome To TDA's" />
+        <div className="flex md:flex-row flex-col-reverse m-4 md:space-x-4 ">
+          <div className="md:w-[80%] my-4 md:my-0">
+            <HomeGrid />
           </div>
-          <EvervaultCard className="h-60" />
-          <div className="m-4 space-y-4">
-            <LatestList title="Latest Projects" tda data={projects} />
-            <LatestList title="Latest Articles" data={articles} />
-          </div>
-          <div className="p-4 bg-white dark:backdrop-filter dark:bg-cyan-950 dark:bg-opacity-40 dark:text-cyan-600 dark:backdrop-blur-sm rounded-md m-4">
-            <span className="text-cyan-500">Note</span>: It&apos;s just a side project so i work on it whenever i can.
+          <div className="h-min md:min-w-[25rem] md:max-w-[28rem] md:w-[20%] space-y-4">
+            <EvervaultCard className="h-80" />
+            <LatestList title="Latest Projects" tda />
+            <LatestList title="Latest Articles" />
           </div>
         </div>
-      </div>
-      <div className="">
-        <StickyScrollReveal />
-        <TextRevealCardPreview />
-        <ContactForm />
       </div>
     </div>
   );

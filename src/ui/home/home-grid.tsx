@@ -4,7 +4,7 @@ import { BentoGrid, BentoGridItem } from "../utils/bento-grid";
 
 export function HomeGrid() {
   return (
-    <BentoGrid className="md:auto-rows-auto">
+    <BentoGrid className="md:auto-rows-auto ">
       {items.map((item, i) => (
         <BentoGridItem
           key={i}
@@ -23,8 +23,8 @@ const Skeleton = ({ src }: { src: string }) => (
       src={src}
       alt="card-image"
       className="w-full h-fit rounded-xl"
-      height={200}
-      width={400}
+      height={400}
+      width={600}
     />
   </div>
 );

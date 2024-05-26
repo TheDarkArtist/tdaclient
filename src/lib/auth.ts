@@ -40,10 +40,7 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   pages: {
-    signIn: `/login`,
-    verifyRequest: `/login`,
     newUser: "/newuser",
-    error: "/login",
   },
   adapter: PrismaAdapter(prisma),
   session: { strategy: "jwt" },
