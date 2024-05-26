@@ -49,7 +49,7 @@ const Page = async ({ params }: { params: Params }) => {
           <div className="flex gap-2">
             <div className="bg-red-950 hidden px-4 py-1 rounded-md">
               <span className="mr-2">views</span>
-              {article?.upVoteCount}
+              {article?.upVotes.length}
             </div>
             <div className="dark:bg-red-950 bg-stone-200 px-2 py-1 rounded-md">
               <span className="mr-2">Views</span>
@@ -57,7 +57,7 @@ const Page = async ({ params }: { params: Params }) => {
             </div>
             <div className="dark:bg-red-950 bg-stone-200 px-2 py-1 rounded-md">
               <span className="mr-2">up votes</span>
-              {article?.upVoteCount}
+              {article?.upVotes.length}
             </div>
           </div>
         </div>

@@ -46,14 +46,14 @@ const Page = async ({ params }: { params: Params }) => {
           <div className="flex gap-2">
             <div className="bg-red-950 hidden px-4 py-1 rounded-md">
               <span className="mr-2">views</span>
-              {project?.upVoteCount}
+              {project?.upVotes.length}
             </div>
             <div className="flex gap-2 dark:border dark:border-stone-800 items-center dark:bg-transparent text-xs h-min bg-stone-200 px-2 py-1 rounded-md">
               <LuEye width={18} />
               <span>{project?.views}</span>
             </div>
             <div className="flex gap-2 dark:border dark:border-stone-800  items-center dark:bg-transparent text-xs h-min bg-stone-200 p-2 rounded-md">
-              <span>{project?.upVoteCount}</span>
+              <span>{project?.upVotes.length}</span>
             </div>
           </div>
         </div>
