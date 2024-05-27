@@ -205,7 +205,7 @@ export const _getDrafts = async () => {
 
 export const _latestArticles = async (limit?: number): Promise<Article[]> => {
   try {
-    return prisma.article.findMany({
+    const articles = prisma.article.findMany({
       orderBy: {
         createdAt: "desc",
       },
@@ -214,7 +214,10 @@ export const _latestArticles = async (limit?: number): Promise<Article[]> => {
       },
       take: limit || 3,
     });
+    return articles || [];
   } catch (error: any) {
     return error;
   }
 };
+
+

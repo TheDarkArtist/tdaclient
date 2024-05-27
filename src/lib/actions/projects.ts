@@ -153,12 +153,13 @@ export const updateProjectMetadata = async (
 
 export const _latestProjects = async (limit?: number): Promise<Project[]> => {
   try {
-    return prisma.project.findMany({
+    const projects = prisma.project.findMany({
       orderBy: {
         createdAt: "desc",
       },
       take: limit || 3,
     });
+    return projects || [];
   } catch (error: any) {
     return error;
   }
