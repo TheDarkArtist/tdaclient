@@ -2,12 +2,13 @@
 
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import NavMenu from "./nav-menu";
 
 const NavProfile = () => {
   const { data, status } = useSession();
   const [isMenuOpen, setMenuOpen] = useState(false);
+  const menuBtnRef = useRef(null);
 
   const handleMenuToggle = () => {
     setMenuOpen((prev) => !prev);
@@ -16,6 +17,7 @@ const NavProfile = () => {
   return (
     <>
       <button
+        ref={menuBtnRef}
         className="hidden md:inline-flex h-12 animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-2 font-medium text-slate-400 transition-colors focus:outline-none focus:border-green-800"
         onClick={handleMenuToggle}
       >
@@ -36,7 +38,11 @@ const NavProfile = () => {
           <div className="ml-2">{data.user.name}</div>
         )}
       </button>
-      <NavMenu isMenuOpen={isMenuOpen} />
+      <NavMenu
+        isMenuOpen={isMenuOpen}
+        setMenuOpen={setMenuOpen}
+        menuBtnRef={menuBtnRef}
+      />
     </>
   );
 };
