@@ -3,10 +3,17 @@ import Image from "next/image";
 import React from "react";
 
 const ProfileOverview = ({ user }: { user: User }) => {
+  if (!user) return <div>NO USER</div>;
   return (
     <div className="flex m-4 gap-4">
       <div>
-        <Image className="rounded-md" src={user.image} alt={user.name} height={200} width={200} />
+        <Image
+          className="rounded-md"
+          src={user.image as string}
+          alt={user.name as string}
+          height={200}
+          width={200}
+        />
       </div>
       <div>
         <div className="flex flex-col space-y-2">

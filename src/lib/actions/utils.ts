@@ -4,57 +4,60 @@ import prisma from "../prisma";
 
 export const getUserByUsername = async (
   username: string
-): Promise<User | { error: string } | null> => {
+): Promise<User | null> => {
   try {
-    const user = await prisma.user.findUnique({
-      where: { username: username },
+    const user = prisma?.user.findUnique({
+      where: {
+        username: username,
+      },
     });
     return user;
   } catch (error: any) {
-    return { error: error.message };
+    return error;
   }
 };
 
-export const getUserByEmail = async (
-  email: string
-): Promise<User | { error: string } | null> => {
+export const getUserByEmail = async (email: string) => {
   try {
-    const user = await prisma.user.findUnique({
-      where: { email },
+    return prisma?.user.findUnique({
+      where: {
+        email: email,
+      },
+    });
+  } catch (error: any) {
+    return {
+      error: error.message,
+    };
+  }
+};
+
+export const getUserById = async (id: string): Promise<User | null> => {
+  try {
+    const user = prisma?.user.findUnique({
+      where: {
+        id: id,
+      },
     });
     return user;
   } catch (error: any) {
-    return { error: error.message };
+    return error;
   }
 };
 
-export const getUserById = async (
-  id: string
-): Promise<User | { error: string } | null> => {
-  try {
-    const user = await prisma.user.findUnique({
-      where: { id },
-    });
-    return user;
-  } catch (error: any) {
-    return { error: error.message };
-  }
-};
-
-export const updateUsername = async (
-  email: string,
-  username: string
-): Promise<User | { error: string }> => {
+export const updateUsername = async (email: string, username: string) => {
   const session = await getSession();
   if (!session?.user) {
     return { error: "Not Authenticated" };
   }
   try {
-    const updatedUser = await prisma.user.update({
-      where: { email },
-      data: { username },
+    return prisma.user.update({
+      where: {
+        email: email,
+      },
+      data: {
+        username: username,
+      },
     });
-    return updatedUser;
   } catch (error: any) {
     return { error: error.message };
   }
