@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { signIn, signOut, useSession } from "next-auth/react";
 import NavMenuProfile from "./nav-menu-profile";
 import { MutableRefObject, useEffect, useRef } from "react";
+import Link from "next/link";
 
 interface NavMenuProps {
   isMenuOpen: boolean;
@@ -47,25 +48,35 @@ const NavMenu: React.FC<NavMenuProps> = ({
           className={`absolute rounded-2xl  w-80 dark:bg-black bg-white/[.8]  dark:bg-grid-white/[0.2] bg-grid-black/[0.2] flex ${isMenuOpen ? "block" : "hidden"} top-20 right-4 border dark:border-stone-600 border-gray-400 shadow-lg dark:shadow-cyan-800/[0.4] shadow-stone-300/[.6]`}
         >
           <div className="absolute rounded-2xl pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]" />
-          <div className="z-10 p-4 w-full">
+
+          <div className="z-10 p-4 w-full ">
             <div>
               <NavMenuProfile data={data as any} />
             </div>
-            {status !== "authenticated" ? (
-              <button
-                className="w-full h-10 dark:bg-sky-950 rounded-xl"
-                onClick={() => signIn("google")}
+            <div className="flex flex-col space-y-4">
+              <Link
+                href={`/${data?.user.username}`}
+                onClick={() => setMenuOpen(false)}
+                className="w-full content-center text-center h-10 dark:bg-sky-950 bg-stone-200 rounded-xl"
               >
-                Sign In
-              </button>
-            ) : (
-              <button
-                className="w-full h-10 dark:bg-sky-950 rounded-xl"
-                onClick={() => signOut()}
-              >
-                Sign Out
-              </button>
-            )}
+                My Profile
+              </Link>
+              {status !== "authenticated" ? (
+                <button
+                  className="w-full h-10 dark:bg-sky-950 bg-stone-200 rounded-xl"
+                  onClick={() => signIn("google")}
+                >
+                  Sign In
+                </button>
+              ) : (
+                <button
+                  className="w-full h-10 dark:bg-sky-950 bg-stone-200 rounded-xl"
+                  onClick={() => signOut()}
+                >
+                  Sign Out
+                </button>
+              )}
+            </div>
           </div>
         </motion.menu>
       )}
