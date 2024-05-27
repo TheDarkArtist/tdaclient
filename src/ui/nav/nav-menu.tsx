@@ -54,13 +54,6 @@ const NavMenu: React.FC<NavMenuProps> = ({
               <NavMenuProfile data={data as any} />
             </div>
             <div className="flex flex-col space-y-4">
-              <Link
-                href={`/${data?.user.username}`}
-                onClick={() => setMenuOpen(false)}
-                className="w-full content-center text-center h-10 dark:bg-sky-950 bg-stone-200 rounded-xl"
-              >
-                My Profile
-              </Link>
               {status !== "authenticated" ? (
                 <button
                   className="w-full h-10 dark:bg-sky-950 bg-stone-200 rounded-xl"
@@ -69,12 +62,21 @@ const NavMenu: React.FC<NavMenuProps> = ({
                   Sign In
                 </button>
               ) : (
-                <button
-                  className="w-full h-10 dark:bg-sky-950 bg-stone-200 rounded-xl"
-                  onClick={() => signOut()}
-                >
-                  Sign Out
-                </button>
+                <>
+                  <Link
+                    href={`/${data?.user.username}`}
+                    onClick={() => setMenuOpen(false)}
+                    className="w-full content-center text-center h-10 dark:bg-sky-950 bg-stone-200 rounded-xl"
+                  >
+                    My Profile
+                  </Link>
+                  <button
+                    className="w-full h-10 dark:bg-sky-950 bg-stone-200 rounded-xl"
+                    onClick={() => signOut()}
+                  >
+                    Sign Out
+                  </button>
+                </>
               )}
             </div>
           </div>
