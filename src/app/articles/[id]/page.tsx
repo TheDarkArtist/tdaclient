@@ -70,7 +70,7 @@ const Page = async ({ params }: { params: Params }) => {
           </div>
         </div>
         <div className="relative min-w-60 max-w-96 hidden md:block">
-          <TOC content={article?.body} navbarHeight={68} />
+          <TOC content={article?.body || ""} navbarHeight={68} />
         </div>
       </div>
     </>
