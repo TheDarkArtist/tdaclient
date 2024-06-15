@@ -17,9 +17,9 @@ const Page = async ({ params }: { params: Params }) => {
   revalidateTag("article");
   return (
     <>
-      <div className="flex justify-center md:pt-24 pt-20 md:p-4 p-2 space-x-4 min-h-screen">
+      <div className="flex justify-center md:pt-20 pt-20 md:p-4 p-2 space-x-4 min-h-screen">
         <div>
-          <div className="dark:bg-red-950 bg-slate-300 p-4 rounded-t-md">
+          <div className="dark:bg-red-950 bg-gray-200 p-4 rounded-t-md">
             <div className="flex space-x-2 rounded-md justify-between">
               <div className="flex items-center gap-2">
                 <Image
