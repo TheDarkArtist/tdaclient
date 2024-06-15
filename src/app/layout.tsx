@@ -19,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`bg-black/[0.1] dark:bg-black ${inter.className}`}>
+      <body className={`bg-stone-100 dark:bg-black ${inter.className}`}>
         <Providers>
           <Navbar />
           {children}
