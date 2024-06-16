@@ -21,19 +21,12 @@ const ArticleDeleteBtn = ({ id }: { id: string }) => {
     return;
   }
 
-  const d = async () => {
+  const del = async () => {
     await _delete(id);
     router.push("/articles");
     router.refresh();
   };
-  return (
-    <form action={d}>
-      <button className="flex items-center space-x-2 border dark:border-stone-600 p-2 rounded-md">
-        <LuTrash width={18} />
-        <span className="md:inline hidden">Delete</span>
-      </button>
-    </form>
-  );
+  return <LuTrash className="h-6 w-6 cursor-pointer" onClick={del} />;
 };
 
 export default ArticleDeleteBtn;

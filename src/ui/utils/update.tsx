@@ -1,33 +1,41 @@
 "use client";
 
-import { LuPencil } from "react-icons/lu";
+import { LuFileEdit } from "react-icons/lu";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React from "react";
 
-// It shoud show if following conditions are met.
-// session.userId = article.userId
-// session.user.access == 'root'
-
 const Update = ({ href, userId }: { href: string; userId?: string }) => {
   const router = useRouter();
-  const { data, status } = useSession();
+  const { data: session, status } = useSession();
 
-  if (status === "unauthenticated") return;
-  if (data && data.user.access != "root" && data.user.id !== userId) {
-    return;
+  if (status === "unauthenticated") {
+    return <p>Please log in to update this content.</p>;
   }
+
+  // Show update button only if:
+  // 1. current user has root access
+  // 2. current user is the owner of the content
+  const shouldShowUpdateButton =
+    session?.user &&
+    (session.user.access === "root" || session.user.id === userId);
+
+  if (!shouldShowUpdateButton) {
+    return null; // or some other UI indicating lack of permission
+  }
+
+  const handleUpdate = () => {
+    router.push(href);
+    router.refresh();
+  };
 
   return (
     <button
-      onClick={() => {
-        router.push(href);
-        router.refresh();
-      }}
-      className={`flex h-min items-center border dark:border-stone-600 space-x-1 rounded-md p-2`}
+      type="button"
+      onClick={handleUpdate}
+      className="flex items-center gap-2 cursor-pointer"
     >
-      <LuPencil width={18} />
-      <span className="md:inline hidden">Update</span>
+      <LuFileEdit className="h-6 w-6" />
     </button>
   );
 };

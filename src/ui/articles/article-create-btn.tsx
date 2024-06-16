@@ -36,7 +36,7 @@ export function ArticleCreateBtn() {
         ) : (
           <div className="flex gap-2">
             <LuPlus className="h-6 w-6 dark:text-white/[.6] text-black/[.6]" />
-            <span>Create</span>
+            <span>Add</span>
           </div>
         )}
       </div>
