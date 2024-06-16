@@ -6,7 +6,7 @@ import { revalidateTag } from "next/cache";
 
 const AllArticleList = async () => {
   const projects = await _getAll();
-  revalidateTag('projects')
+  revalidateTag("projects");
   return (
     <div className="grid gap-4 md:grid-cols-1 ">
       {projects.map((data) => (
