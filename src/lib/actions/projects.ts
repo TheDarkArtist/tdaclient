@@ -9,7 +9,7 @@ import { getBlurDataURL } from "../utils";
 
 const nanoid = customAlphabet(
   "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
-  7
+  7,
 );
 
 export const _create = async () => {
@@ -90,20 +90,31 @@ export async function _delete(articleId: string) {
   return deleteArticle;
 }
 
-export async function _incView(articleId: string) {
-  const views = await prisma.project
-    .update({
-      where: { id: articleId },
-      data: {
-        views: {
-          increment: 1,
-        },
-      },
-    })
-    .catch((error) => {
-      console.error("Error: ", error);
+export async function _incView(projectId: string, userId: string) {
+  try {
+    // Fetch the current project record
+    const project = await prisma.project.findUnique({
+      where: { id: projectId },
     });
-  return views;
+
+    if (!project) {
+      throw new Error(`Project with id ${projectId} not found`);
+    }
+
+    const updatedProject = await prisma.project.update({
+      where: { id: projectId },
+      data: {
+        views: [...project.views, userId], // Adding userId to the views array
+      },
+    });
+
+    return updatedProject.views; // Return the updated views array
+  } catch (error) {
+    console.error("Error:", error);
+    throw error; // Re-throw the error to handle it higher up
+  } finally {
+    await prisma.$disconnect(); // Disconnect Prisma client after operation
+  }
 }
 
 export const _getPublished = async (): Promise<Project[]> => {
@@ -139,7 +150,7 @@ export const _getDrafts = async () => {
 export const updateProjectMetadata = async (
   formData: FormData,
   id: string,
-  published: string
+  published: string,
 ) => {
   await prisma.project.update({
     where: {

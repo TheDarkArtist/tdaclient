@@ -9,7 +9,7 @@ import { getBlurDataURL } from "../utils";
 
 const nanoid = customAlphabet(
   "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
-  7
+  7,
 );
 
 export const _create = async (): Promise<Article | { error: string }> => {
@@ -38,8 +38,8 @@ export async function _getAll() {
     });
     return articles;
   } catch (error) {
-    console.error("Error fetcing articles, ", error);
-    throw error;
+    console.error("Error fetching articles:", error);
+    throw new Error("Failed to fetch articles");
   }
 }
 
@@ -74,6 +74,7 @@ export async function _update(data: Article) {
       error: "Post not found",
     };
   }
+
   const response = await prisma.article
     .update({
       where: {
@@ -106,20 +107,31 @@ export async function _delete(articleId: string) {
   return deleteArticle;
 }
 
-export async function _incView(articleId: string) {
-  const views = await prisma.article
-    .update({
+export async function _incView(articleId: string, userId: string) {
+  try {
+    // Fetch the current article record
+    const article = await prisma.article.findUnique({
+      where: { id: articleId },
+    });
+
+    if (!article) {
+      throw new Error(`Article with id ${articleId} not found`);
+    }
+
+    const updatedArticle = await prisma.article.update({
       where: { id: articleId },
       data: {
-        views: {
-          increment: 1,
-        },
+        views: [...article.views, userId], // Adding userId to the views array
       },
-    })
-    .catch((error) => {
-      console.error("Error: ", error);
     });
-  return views;
+
+    return updatedArticle.views; // Return the updated views array
+  } catch (error) {
+    console.error("Error:", error);
+    throw error; // Re-throw the error to handle it higher up
+  } finally {
+    await prisma.$disconnect(); // Disconnect Prisma client after operation
+  }
 }
 
 export const updateArticleMetadata = withArticleAuth(
@@ -170,7 +182,7 @@ export const updateArticleMetadata = withArticleAuth(
         };
       }
     }
-  }
+  },
 );
 
 export const _getPublished = async () => {
@@ -219,5 +231,3 @@ export const _latestArticles = async (limit?: number): Promise<Article[]> => {
     return error;
   }
 };
-
-
