@@ -75,10 +75,20 @@ const MarkdownRenderer = ({ content }: { content: string }) => {
           return <tbody {...props} className="" />;
         },
         th: ({ node, ...props }) => {
-          return <td {...props} className="border border-sky-600 font-bold dark:text-green-600 p-2" />;
+          return (
+            <td
+              {...props}
+              className="border border-sky-600 font-bold dark:text-green-600 p-2"
+            />
+          );
         },
         td: ({ node, ...props }) => {
-          return <td {...props} className="border border-sky-600 p-2 dark:text-sky-400" />;
+          return (
+            <td
+              {...props}
+              className="border border-sky-600 p-2 dark:text-sky-400"
+            />
+          );
         },
       }}
     >
