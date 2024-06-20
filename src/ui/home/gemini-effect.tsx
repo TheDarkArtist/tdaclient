@@ -22,8 +22,8 @@ export function GeminiEffect() {
       ref={ref}
     >
       <GoogleGeminiEffect
-        title="Creativity + Ideas  = Projects"
-        description="In Order To Create Something Awesome You Have To Find Yourself."
+        title="Vision + Code = Artistry"
+        description="The way we solve problems shapes our perception of them, revealing much about who we are."
         pathLengths={[
           pathLengthFirst,
           pathLengthSecond,
