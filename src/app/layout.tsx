@@ -21,8 +21,13 @@ export default function RootLayout({
     <html lang="en">
       <body className={`bg-stone-100 dark:bg-black ${inter.className}`}>
         <Providers>
-          <Navbar />
-          {children}
+          <header>
+            <Navbar />
+          </header>
+          <main>{children}</main>
+          <footer>
+            <Footer />
+          </footer>
         </Providers>
       </body>
     </html>
