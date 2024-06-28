@@ -1,3 +1,4 @@
+import { _update } from "@/lib/actions/articles";
 import { Article, Project } from "@prisma/client";
 import React from "react";
 import ReactTextareaAutosize from "react-textarea-autosize";
@@ -5,6 +6,7 @@ import ReactTextareaAutosize from "react-textarea-autosize";
 const Body = ({
   setData,
   post,
+  handleSave,
 }: {
   setData: React.Dispatch<React.SetStateAction<Article | Project>>;
   post: Article | Project;
@@ -22,6 +24,7 @@ const Body = ({
             body: e.target.value,
           }))
         }
+        onBlur={handleSave}
       />
     </div>
   );
