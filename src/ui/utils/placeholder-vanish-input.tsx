@@ -8,10 +8,13 @@ export function PlaceholdersAndVanishInput({
   placeholders,
   onChange,
   onSubmit,
+  defaultValue,
+  params
 }: {
   placeholders: string[];
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  defaultValue:string
 }) {
   const [currentPlaceholder, setCurrentPlaceholder] = useState(0);
 
@@ -180,6 +183,7 @@ export function PlaceholdersAndVanishInput({
             onChange && onChange(e);
           }
         }}
+        defaultValue={defaultValue}
         onKeyDown={handleKeyDown}
         ref={inputRef}
         value={value}

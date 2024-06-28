@@ -3,15 +3,12 @@ import Markdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import rehypeRaw from "rehype-raw";
 import rehypeKatex from "rehype-katex";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import "highlight.js/styles/atom-one-dark.min.css";
 import "katex/dist/katex.min.css"; // Import KaTeX CSS
 import "highlight.js/styles/atom-one-dark.min.css";
-import Link from "next/link";
-import { table } from "console";
 
 const MarkdownRenderer = ({ content }: { content: string }) => {
   return (

@@ -1,7 +1,7 @@
 "use client";
 
 import { LuFileEdit } from "react-icons/lu";
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React from "react";
 
@@ -9,8 +9,12 @@ const Update = ({ href, userId }: { href: string; userId?: string }) => {
   const router = useRouter();
   const { data: session, status } = useSession();
 
-  if (status === "unauthenticated") {
-    return <p>Please log in to update this content.</p>;
+  if (status != "authenticated") {
+    return (
+      <button className="text-cyan-600" onClick={() => signIn("google")}>
+        Login
+      </button>
+    );
   }
 
   // Show update button only if:
