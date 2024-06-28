@@ -84,6 +84,8 @@ export async function _update(data: Article) {
         title: data.title,
         description: data.description,
         body: data.body,
+        tags: data.tags,
+        published: data.published,
       },
     })
     .catch((error: any) => {
@@ -229,5 +231,82 @@ export const _latestArticles = async (limit?: number): Promise<Article[]> => {
     return articles || [];
   } catch (error: any) {
     return error;
+  }
+};
+
+export const _filteredArticles = async (
+  term: string,
+  limit?: number,
+): Promise<Article[]> => {
+  try {
+    const articles = await prisma.article.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+      where: {
+        published: true,
+        OR: [
+          {
+            title: {
+              contains: term,
+              mode: "insensitive",
+            },
+          },
+          {
+            description: {
+              contains: term,
+              mode: "insensitive",
+            },
+          },
+        ],
+      },
+      take: limit || 6,
+    });
+    return articles || [];
+  } catch (error: any) {
+    console.error("Error fetching filtered articles:", error);
+    throw error;
+  }
+};
+
+export const addComment = async (
+  text: string,
+  userId: string,
+  articleId: string,
+) => {
+  try {
+    const comment = await prisma.comment.create({
+      data: {
+        text: text,
+        userId: userId,
+        parentId: articleId,
+        parentType: "article",
+      },
+    });
+    return comment;
+  } catch (error) {
+    console.error("Error creating comment:", error);
+    throw error;
+  }
+};
+
+export const getComments = async (articleId: string) => {
+  try {
+    const comments = await prisma.comment.findMany({
+      where: {
+        parentId: articleId,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+      include: {
+        user: true,
+      },
+    });
+
+    return comments;
+  } catch (error) {
+    console.error("Error fetching comments:", error);
+    throw new Error("Failed to fetch comments");
   }
 };

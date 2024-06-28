@@ -73,7 +73,6 @@ export async function _update(data: Project) {
         error: error.message,
       };
     });
-  console.log(response);
   return response;
 }
 
