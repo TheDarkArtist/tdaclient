@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-
 interface TOCProps {
   content: string;
   navbarHeight: number; // Add navbarHeight as a prop
@@ -38,7 +37,9 @@ const TOC: React.FC<TOCProps> = ({ content, navbarHeight }) => {
 
   return (
     <div className="fixed rounded-md p-4 mr-4 dark:bg-[#111111] bg-white">
-      <h1 className="pb-4 text-2xl font-bold text-sky-600">Table of Contents</h1>
+      <h1 className="pb-4 text-2xl font-bold text-sky-600">
+        Table of Contents
+      </h1>
       <ul className="space-y-2">
         {headings.map((heading, index) => (
           <li key={index}>
