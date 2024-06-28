@@ -2,7 +2,7 @@ import { _getOne } from "@/lib/actions/articles";
 import { getSession } from "@/lib/auth";
 import TDAEditor from "@/utils/editor/tda-editor";
 import { notFound, redirect } from "next/navigation";
-import React from "react";
+import React, { Suspense } from "react";
 
 const page = async ({ params }: { params: { id: string } }) => {
   const session = await getSession();
@@ -13,7 +13,9 @@ const page = async ({ params }: { params: { id: string } }) => {
   if (session.user.access === "root") {
     return (
       <div className="pt-16 absolute h-full w-full">
-        <TDAEditor params={params} />
+        <Suspense fallback={<div>Loading...</div>}>
+          <TDAEditor params={params} />
+        </Suspense>
       </div>
     );
   }
@@ -25,7 +27,9 @@ const page = async ({ params }: { params: { id: string } }) => {
 
   return (
     <div className="pt-16 absolute h-full w-full">
-      <TDAEditor params={params} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <TDAEditor params={params} />
+      </Suspense>
     </div>
   );
 };
