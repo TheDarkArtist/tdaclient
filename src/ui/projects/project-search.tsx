@@ -6,7 +6,7 @@ export function ProjectSearch() {
   const placeholders = [
     "Search awesesome projects",
     "Write a Javascript method to reverse a string",
-    "TheDjangoBlog"
+    "TheDjangoBlog",
   ];
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,6 +19,7 @@ export function ProjectSearch() {
   return (
     <div className="h-[8rem] flex flex-col justify-center  items-center px-4">
       <PlaceholdersAndVanishInput
+        defaultValue=""
         placeholders={placeholders}
         onChange={handleChange}
         onSubmit={onSubmit}

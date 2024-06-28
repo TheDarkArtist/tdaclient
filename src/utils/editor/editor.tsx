@@ -53,7 +53,7 @@ const Editor = ({ post }: { post: Article | Project }) => {
     <div className="flex relative flex-col min-h-full dark:bg-[#111111]">
       <Header data={data} setData={setData} isPendingSave={isPendingSaving} />
       <div className="absolute w-full flex min-h-full">
-        <Body setData={setData} post={post} />
+        <Body setData={setData} handleSave={handleSave} post={post} />
         <div className="border-4 dark:border-stone-800" />
         <Preview data={data.body} />
       </div>

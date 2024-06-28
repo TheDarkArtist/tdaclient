@@ -5,7 +5,13 @@ import Link from "next/link";
 import { revalidateTag } from "next/cache";
 import { Article } from "@prisma/client";
 
-const FilteredArticleList = async ({ query, currentPage }) => {
+const FilteredArticleList = async ({
+  query,
+  currentPage,
+}: {
+  query: string;
+  currentPage: number;
+}) => {
   const projects = (await _filteredArticles(query)) as Article[];
   revalidateTag("projects");
   return (

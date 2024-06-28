@@ -16,6 +16,7 @@ const Header = ({
 }: {
   data: Article | Project;
   isPendingSave: boolean;
+  setData: React.Dispatch<React.SetStateAction<Project | Article>>;
 }) => {
   data.title = extractFirstHeading(data.body as string)?.text as string;
   data.description = extractFirstParagraph(data.body as string);
