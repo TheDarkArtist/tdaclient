@@ -3,9 +3,9 @@ import React from "react";
 const ArticleTag = ({ tag }: { tag: string }) => {
   return (
     <>
-      <span className="hover:animate-bounce relative inline-flex overflow-hidden rounded-md p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
-        <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
-        <span className="inline-flex 1-full text-xs w-full cursor-pointer items-center justify-center rounded-md dark:bg-slate-950 bg-white px-3 py-1 font-medium dark:text-white backdrop-blur-3xl">
+      <span className="flex justify-center items-center hover:animate-bounce relative h-6 min-w-10 p-[1px] overflow-hidden rounded-md">
+        <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,var(--sky-500),var(--blue-900),var(--cyan-500))]" />
+        <span className="flex justify-center mr-px items-center dark:bg-slate-950 bg-white w-full h-full px-3 z-20 py-1 rounded-md">
           {tag || "lang"}
         </span>
       </span>

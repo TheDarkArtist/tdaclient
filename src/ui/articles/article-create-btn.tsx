@@ -20,7 +20,7 @@ export function ArticleCreateBtn() {
         startTransition(async () => {
           const post: Article | { error: string } = await _create();
           if ("error" in post) {
-            console.log(post.error);
+            console.error(post.error);
             return;
           }
           router.push(`/articles/post/${post.id}?source=articles`);
@@ -32,7 +32,7 @@ export function ArticleCreateBtn() {
     >
       <div>
         {isPending ? (
-          <LoadingDots color="#111" />
+          <LoadingDots color="red" />
         ) : (
           <div className="flex gap-2">
             <LuPlus className="h-6 w-6 dark:text-white/[.6] text-black/[.6]" />

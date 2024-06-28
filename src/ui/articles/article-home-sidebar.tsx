@@ -1,25 +1,13 @@
 import React from "react";
+import AsrticleStats from "./article-stats";
+import Activities from "./activities";
 
 const ArticleHomeSidebar = () => {
   return (
-    <div className="hidden md:flex flex-col gap-4 w-full max-w-sm mx-4">
-      <div className="border h-min w-full rounded-md dark:border-stone-600 border-gray-200 dark:bg-black bg-white">
-        <header className="bg-black/[.2] dark:bg-zinc-900/[.6] rounded-t-md border-b dark:border-stone-600 mb-2 p-2">
-          Section 1
-        </header>
-        <main className="p-2">just the way you did so easily</main>
-      </div>
-      <div className="border h-min w-full rounded-md dark:border-stone-600 border-gray-200 dark:bg-black bg-white">
-        <header className="bg-black/[.2] dark:bg-zinc-900/[.6] rounded-t-md border-b dark:border-stone-600 mb-2 p-2">
-          Section 2
-        </header>
-        <main className="p-2">just the way you did so easily</main>
-      </div>
-      <div className="border h-min w-full rounded-md dark:border-stone-600 border-gray-200 dark:bg-black bg-white">
-        <header className="bg-black/[.2] dark:bg-zinc-900/[.6] rounded-t-md border-b dark:border-stone-600 mb-2 p-2">
-          Section 3
-        </header>
-        <main className="p-2">just the way you did so easily</main>
+    <div className="hidden fixed md:flex flex-col h-full gap-4 w-full max-w-[20rem]">
+      <div className="h-min space-y-4 rounded-md dark:bg-black bg-white">
+        <AsrticleStats />
+        <Activities />
       </div>
     </div>
   );
