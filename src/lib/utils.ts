@@ -31,18 +31,18 @@ export function formatDateAndTime(dateTime: Date): {
   time: string;
 } {
   const months = [
-    "January",
-    "February",
-    "March",
-    "April",
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
     "May",
     "June",
     "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
+    "Aug",
+    "Sept",
+    "Oct",
+    "Nov",
+    "Dec",
   ];
   if (!dateTime) return {date:"May 24", time:"2 AM"};
   const monthIndex = dateTime.getMonth();
