@@ -260,7 +260,7 @@ export const _filteredArticles = async (
           },
         ],
       },
-      take: limit || 6,
+      take: limit || 100,
     });
     return articles || [];
   } catch (error: any) {
