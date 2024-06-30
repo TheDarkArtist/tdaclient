@@ -8,6 +8,10 @@ const Publish = ({ data }: { data: Article | Project }) => {
   const [published, setPublished] = useState(data.published);
 
   const handleTogglePublish = async () => {
+    if (data.body === "") {
+      alert("You Can't Publish an Empty Article");
+      return;
+    }
     const newPublishedStatus = !published;
     await _update({ ...(data as Article), published: newPublishedStatus });
     setPublished(newPublishedStatus);
