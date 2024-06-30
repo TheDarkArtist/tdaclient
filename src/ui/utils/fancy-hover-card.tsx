@@ -19,7 +19,7 @@ export const EvervaultCard = ({
   const [randomString, setRandomString] = useState("");
 
   useEffect(() => {
-    let str = generateRandomString(1500);
+    let str = generateRandomString(1800);
     setRandomString(str);
   }, []);
 
@@ -33,7 +33,7 @@ export const EvervaultCard = ({
   }
 
   return (
-    <div className="border dark:border-stone-800 border-gray-200 rounded-3xl bg-white dark:bg-black">
+    <div className="border dark:border-stone-700 border-gray-300 rounded-2xl bg-white dark:bg-black">
       <div
         className={cn(
           " bg-transparent aspect-square  flex items-center justify-center w-full h-ful relative ",
@@ -42,7 +42,7 @@ export const EvervaultCard = ({
       >
         <div
           onMouseMove={onMouseMove}
-          className="group/card rounded-t-3xl w-full relative overflow-hidden bg-transparent flex items-center justify-center h-full"
+          className="group/card border-b dark:border-stone-700 border-stone-300 rounded-t-2xl w-full relative overflow-hidden bg-transparent flex items-center justify-center h-full"
         >
           <CardPattern
             mouseX={mouseX}
@@ -51,25 +51,20 @@ export const EvervaultCard = ({
           />
           <div className="relative z-10 flex items-center justify-center">
             <div className="relative h-44 w-44  rounded-full flex items-center justify-center text-white font-bold text-4xl">
-              <div className="absolute w-full h-full bg-white/[0.8] dark:bg-black/[0.8] blur-sm rounded-full" />
-              <div className="dark:text-white text-black z-20">
-                <div className="rounded-full">
-                  <Image
-                    className="rounded-full"
-                    src={"/me.png"}
-                    alt="kushagra sharma"
-                    height={400}
-                    width={400}
-                  />
-                </div>
-              </div>
+              <Image
+                className="rounded-full z-20"
+                src={"/me.png"}
+                alt="kushagra sharma"
+                height={400}
+                width={400}
+              />
             </div>
           </div>
         </div>
       </div>
       <div className="py-4">
         <div className="space-y-1">
-          <h1 className="md:text-[2vw] text-3xl text-center font-bold leading-none">
+          <h1 className="md:text-[3vh] text-3xl text-center font-bold leading-none">
             Kushagra Sharma
           </h1>
           <p className="flex gap-2 w-full items-center justify-center text-sm ">
@@ -77,11 +72,7 @@ export const EvervaultCard = ({
             Developer
           </p>
         </div>
-        <p className="m-4 text-gray-600 dark:text-gray-400">
-          I like to think of myself as a problem solver, who uses tech to solve
-          problems arround him, It feels funny when you talk about youself in
-          third person :)
-        </p>
+        <p className="m-4 text-gray-600 dark:text-gray-400">{text}</p>
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ import { HomeGrid } from "@/ui/home/home-grid";
 import LatestList from "@/ui/home/latest-list";
 import { EvervaultCard } from "@/ui/utils/fancy-hover-card";
 import { Meteors } from "@/ui/utils/meteor";
+import Note from "@/ui/utils/note";
 
 export default async function Home() {
   return (
@@ -27,7 +28,11 @@ export default async function Home() {
             <HomeGrid />
           </div>
           <div className="h-min md:min-w-[25rem] md:max-w-[28rem] md:w-[20%] space-y-4">
-            <EvervaultCard className="h-80" />
+            <Note note="This is just a side project that I work on when I have time, so some things might be broken." />
+            <EvervaultCard
+              text="I'm a tech enthusiast who loves solving problems, diving deep to find the most detailed solutions. Whether it's tiny bugs or massive challenges, I'm on it. Plus, I have a hacker's mindset—minus the hoodie and dark basement."
+              className="h-80"
+            />
             <LatestList title="Latest Projects" tda />
             <LatestList title="Latest Articles" />
           </div>
