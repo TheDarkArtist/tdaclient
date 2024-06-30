@@ -5,7 +5,7 @@ const ArticleTag = ({ tag }: { tag: string }) => {
     <>
       <span className="flex justify-center items-center hover:animate-bounce relative h-6 min-w-10 p-[1px] overflow-hidden rounded-md">
         <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,var(--sky-500),var(--blue-900),var(--cyan-500))]" />
-        <span className="flex justify-center mr-px items-center dark:bg-slate-950 bg-white w-full h-full px-3 z-20 py-1 rounded-md">
+        <span className="flex justify-center mx-px items-center dark:bg-slate-950 bg-white w-full h-full px-3 z-20 py-1 rounded-md">
           {tag || "lang"}
         </span>
       </span>
