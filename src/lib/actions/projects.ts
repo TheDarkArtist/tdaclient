@@ -83,6 +83,8 @@ export async function _update(data: Project) {
         description: data.description,
         body: data.body,
         tags: data.tags,
+        repo: data.repo,
+        link: data.link,
         published: data.published,
       },
     })

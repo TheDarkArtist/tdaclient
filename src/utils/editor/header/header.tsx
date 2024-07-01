@@ -8,6 +8,7 @@ import Save from "./save";
 import Delete from "./delete";
 import Back from "./back";
 import Tags from "./tags";
+import Urls from "./urls";
 
 const Header = ({
   setData,
@@ -23,8 +24,9 @@ const Header = ({
   return (
     <div className="fixed -translate-y-1 md:translate-y-0 flex justify-between items-center z-10 w-full p-2 border-b dark:border-stone-700 border-stone-400 dark:bg-zinc-800 bg-stone-200">
       <div className="flex relative gap-4 items-center">
-        <h1>TDAEditor</h1>
+        <h1 className="hidden md:block">TDAEditor</h1>
         <Tags data={data} setData={setData} />
+        <Urls data={data} setData={setData} />
       </div>
       <div className="flex items-center gap-4">
         <Publish data={data} />
