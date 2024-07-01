@@ -23,13 +23,17 @@ export function ProjectCard({ data }: { data: Project }) {
             <span>{data.views.length}</span>
           </div>
           <div className="flex gap-2 items-center text-sky-600">
-            <LuGithub className="h-6 w-6 cursor-pointer hover:border border-sky-600 border-dotted" />
-            <LuExternalLink className="h-6 w-6 cursor-pointer hover:border border-sky-600 border-dotted" />
+            <Link href={data.link || ""}>
+              <LuGithub className="h-6 w-6 cursor-pointer hover:border border-sky-600 border-dotted" />
+            </Link>
+            <Link href={data.link || ""}>
+              <LuExternalLink className="h-6 w-6 cursor-pointer hover:border border-sky-600 border-dotted" />
+            </Link>
           </div>
         </CardItem>
         <CardItem
           translateZ="50"
-          className={`text-3xl font-bold text-green-600`}
+          className={`hover:border border-dotted border-green-600 text-3xl font-bold text-green-600`}
         >
           <Link
             onClick={() => {
