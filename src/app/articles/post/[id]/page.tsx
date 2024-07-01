@@ -4,7 +4,13 @@ import TDAEditor from "@/utils/editor/tda-editor";
 import { notFound, redirect } from "next/navigation";
 import React, { Suspense } from "react";
 
-const page = async ({ params }: { params: { id: string } }) => {
+const page = async ({
+  params,
+  searchParams,
+}: {
+  params: { id: string };
+  searchParams: { source: string };
+}) => {
   const session = await getSession();
   if (!session) {
     redirect("/login");
@@ -14,7 +20,7 @@ const page = async ({ params }: { params: { id: string } }) => {
     return (
       <div className="pt-16 absolute h-full w-full">
         <Suspense fallback={<div>Loading...</div>}>
-          <TDAEditor params={params} />
+          <TDAEditor params={params} source={searchParams.source} />
         </Suspense>
       </div>
     );
@@ -28,7 +34,7 @@ const page = async ({ params }: { params: { id: string } }) => {
   return (
     <div className="pt-16 absolute h-full w-full">
       <Suspense fallback={<div>Loading...</div>}>
-        <TDAEditor params={params} />
+        <TDAEditor params={params} source={searchParams.source} />
       </Suspense>
     </div>
   );

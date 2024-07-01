@@ -1,27 +1,42 @@
-import { _getOne } from "@/lib/actions/projects";
 import { getSession } from "@/lib/auth";
-import GoBack from "@/ui/utils/back";
-import Editor from "@/ui/editor/editor";
 import { notFound, redirect } from "next/navigation";
-import React from "react";
-import { Project } from "@prisma/client";
+import React, { Suspense } from "react";
+import TDAEditor from "@/utils/editor/tda-editor";
+import { _getOne } from "@/lib/actions/projects";
 
-const page = async ({ params }: { params: { id: string } }) => {
+const page = async ({
+  params,
+  searchParams,
+}: {
+  params: { id: string };
+  searchParams: { source: string };
+}) => {
   const session = await getSession();
   if (!session) {
     redirect("/login");
   }
 
+  if (session.user.access === "root") {
+    return (
+      <div className="pt-16 absolute h-full w-full">
+        <Suspense fallback={<div>Loading...</div>}>
+          <TDAEditor source={searchParams.source} params={params} />
+        </Suspense>
+      </div>
+    );
+  }
+
   const data = await _getOne(params.id);
+  if (!data || data.userId !== session.user.id) {
+    notFound();
+  }
 
   return (
-    <>
-      <div className="pt-20 flex w-full justify-center">
-        <div className="md:max-w-[60rem] w-full ">
-          <Editor post={data as Project} />
-        </div>
-      </div>
-    </>
+    <div className="absolute border h-full w-full">
+      <Suspense fallback={<div>Loading...</div>}>
+        <TDAEditor params={params} source={searchParams.source} />
+      </Suspense>
+    </div>
   );
 };
 
