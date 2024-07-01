@@ -2,24 +2,28 @@
 
 import { Project } from "@prisma/client";
 import prisma from "../prisma";
-import { getSession, withProjectAuth } from "../auth";
+import { getSession } from "../auth";
 import { customAlphabet } from "nanoid";
-import { put } from "@vercel/blob";
-import { getBlurDataURL } from "../utils";
 
 const nanoid = customAlphabet(
   "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
   7,
 );
 
-export const _create = async () => {
+export const _create = async (): Promise<Project | { error: string }> => {
+  const session = await getSession();
+  if (!session?.user.id) {
+    return {
+      error: "Not authenticated",
+    };
+  }
   const response = await prisma.project.create({
     data: {
       title: "",
       body: "",
+      userId: session.user.id,
     },
   });
-
   return response;
 };
 
@@ -52,11 +56,23 @@ export async function _getOne(projectId: string) {
 }
 
 export async function _update(data: Project) {
+  const session = await getSession();
+  if (!session?.user.id) {
+    return {
+      error: "Not authenticated",
+    };
+  }
   const post = await prisma.project.findUnique({
     where: {
       id: data.id,
     },
   });
+  if (!post || post.userId !== session.user.id) {
+    return {
+      error: "Post not found",
+    };
+  }
+
   const response = await prisma.project
     .update({
       where: {
@@ -64,8 +80,10 @@ export async function _update(data: Project) {
       },
       data: {
         title: data.title,
-        body: data.body,
         description: data.description,
+        body: data.body,
+        tags: data.tags,
+        published: data.published,
       },
     })
     .catch((error: any) => {
@@ -172,5 +190,82 @@ export const _latestProjects = async (limit?: number): Promise<Project[]> => {
     return projects || [];
   } catch (error: any) {
     return error;
+  }
+};
+
+export const _filteredProjects = async (
+  term: string,
+  limit?: number,
+): Promise<Project[]> => {
+  try {
+    const projects = await prisma.project.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+      where: {
+        published: true,
+        OR: [
+          {
+            title: {
+              contains: term,
+              mode: "insensitive",
+            },
+          },
+          {
+            description: {
+              contains: term,
+              mode: "insensitive",
+            },
+          },
+        ],
+      },
+      take: limit || 100,
+    });
+    return projects || [];
+  } catch (error: any) {
+    console.error("Error fetching filtered projects:", error);
+    throw error;
+  }
+};
+
+export const addComment = async (
+  text: string,
+  userId: string,
+  projectId: string,
+) => {
+  try {
+    const comment = await prisma.comment.create({
+      data: {
+        text: text,
+        userId: userId,
+        parentId: projectId,
+        parentType: "project",
+      },
+    });
+    return comment;
+  } catch (error) {
+    console.error("Error creating comment:", error);
+    throw error;
+  }
+};
+
+export const getComments = async (projectId: string) => {
+  try {
+    const comments = await prisma.comment.findMany({
+      where: {
+        parentId: projectId,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+      include: {
+        user: true,
+      },
+    });
+
+    return comments;
+  } catch (error) {
+    console.error("Error fetching comments:", error);
+    throw new Error("Failed to fetch comments");
   }
 };
