@@ -13,27 +13,19 @@ const ProjectDeleteBtn = ({ id }: { id: string }) => {
     return;
   }
 
-  // Show delete button only if
-  // 1. current user has root access
-  // 2. current user wrote the article
-
-  if (data && data.user.access != "root" && id != data?.user.id) {
+  if (data && data.user && data.user.access != "root" && id != data?.user.id) {
     return;
   }
 
-  const d = async () => {
-    await _delete(id);
-    router.push("/projects");
-    router.refresh();
+  const del = async () => {
+    if (window.confirm("Are you sure you want to delete this article?")) {
+      await _delete(id);
+      router.push("/projects");
+      router.refresh();
+    }
   };
-  return (
-    <form action={d}>
-      <button className="flex items-center space-x-2 border dark:border-stone-600 p-2 rounded-md">
-        <LuTrash width={18} />
-        <span className="md:inline hidden">Delete</span>
-      </button>
-    </form>
-  );
+
+  return <LuTrash className="h-6 w-6 cursor-pointer" onClick={del} />;
 };
 
 export default ProjectDeleteBtn;

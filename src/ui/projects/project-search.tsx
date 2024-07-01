@@ -1,28 +1,35 @@
 "use client";
 
-import { PlaceholdersAndVanishInput } from "../utils/placeholder-vanish-input";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useDebouncedCallback } from "use-debounce";
 
 export function ProjectSearch() {
-  const placeholders = [
-    "Search awesesome projects",
-    "Write a Javascript method to reverse a string",
-    "TheDjangoBlog",
-  ];
+  const searchParams = useSearchParams();
+  const params = new URLSearchParams(searchParams);
+  const pathname = usePathname();
+  const { replace } = useRouter();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
-  };
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log("submitted");
-  };
+  const handleSearch = useDebouncedCallback((term: string) => {
+    if (term) {
+      params.set("query", term);
+    } else {
+      params.delete("query");
+    }
+    replace(`${pathname}?${params.toString()}`);
+  }, 300);
+
   return (
-    <div className="h-[8rem] flex flex-col justify-center  items-center px-4">
-      <PlaceholdersAndVanishInput
-        defaultValue=""
-        placeholders={placeholders}
-        onChange={handleChange}
-        onSubmit={onSubmit}
+    <div className="h-[4rem] flex justify-center w-full items-center">
+      <input
+        className="py-2.5 px-4 rounded-md dark:bg-zinc-950 border dark:border-stone-600/60 border-stone-300 w-full focus:outline-none"
+        placeholder="Search for articles"
+        defaultValue={searchParams.get("query")?.toString() as string}
+        onChange={(e) => {
+          handleSearch(e.target.value);
+        }}
+        onSubmit={(e) => {
+          e.preventDefault();
+        }}
       />
     </div>
   );
