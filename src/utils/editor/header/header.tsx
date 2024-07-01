@@ -21,7 +21,7 @@ const Header = ({
   data.title = extractFirstHeading(data.body as string)?.text as string;
   data.description = extractFirstParagraph(data.body as string);
   return (
-    <div className="fixed flex justify-between items-center z-10 w-full p-2 border-b dark:border-stone-700 border-stone-400 dark:bg-zinc-800 bg-stone-200">
+    <div className="fixed -translate-y-1 md:translate-y-0 flex justify-between items-center z-10 w-full p-2 border-b dark:border-stone-700 border-stone-400 dark:bg-zinc-800 bg-stone-200">
       <div className="flex relative gap-4 items-center">
         <h1>TDAEditor</h1>
         <Tags data={data} setData={setData} />

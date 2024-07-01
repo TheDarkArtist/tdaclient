@@ -11,9 +11,9 @@ type BodyProps = {
 
 const Body: React.FC<BodyProps> = ({ setData, post, handleSave }) => {
   return (
-    <div className="w-1/2 mt-10 h-full p-4">
+    <div className="md:w-1/2 p-4">
       <ReactTextareaAutosize
-        className="w-full bg-transparent focus:outline-none no-scrollbar pb-10 resize-none h-full"
+        className="w-full bg-transparent pt-10 focus:outline-none no-scrollbar resize-none"
         placeholder="Start Typing..."
         minRows={30}
         defaultValue={post.body}
