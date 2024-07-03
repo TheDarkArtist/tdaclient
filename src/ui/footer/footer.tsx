@@ -5,7 +5,6 @@ import GetIP from "../utils/get-ip";
 const Footer = () => {
   return (
     <div className="h-20">
-      <GetIP />
     </div>
   );
 };

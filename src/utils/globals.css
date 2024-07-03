@@ -16,6 +16,13 @@
   }
 }
 
+*:focus{
+    border-radius: 0;
+    outline-color: var(--cyan-600);
+    outline-style: dotted;
+    outline-width: 1px;
+}
+
 ::-webkit-scrollbar {
   width: .8rem;
 }

@@ -3,6 +3,7 @@ import { _latestProjects } from "@/lib/actions/projects";
 import { GeminiEffect } from "@/ui/home/gemini-effect";
 import { HomeGrid } from "@/ui/home/home-grid";
 import LatestList from "@/ui/home/latest-list";
+import MyResume from "@/ui/home/my-resume";
 import { EvervaultCard } from "@/ui/utils/fancy-hover-card";
 import { Meteors } from "@/ui/utils/meteor";
 import Note from "@/ui/utils/note";
@@ -33,8 +34,12 @@ export default async function Home() {
               text="I'm a tech enthusiast who loves solving problems, diving deep to find the most detailed solutions. Whether it's tiny bugs or massive challenges, I'm on it. Plus, I have a hacker's mindset—minus the hoodie and dark basement."
               className="h-80"
             />
-            <LatestList title="Latest Projects" tda />
-            <LatestList title="Latest Articles" />
+            <LatestList limit={6} title="Latest Projects" tda />
+            <LatestList limit={6} title="Latest Articles" />
+            <MyResume
+              preview="https://drive.google.com/file/d/17Du2IUlkgV3ms5lhaLNI_EGnwDGKjV46/view?usp=sharing"
+              download="https://drive.usercontent.google.com/download?id=17Du2IUlkgV3ms5lhaLNI_EGnwDGKjV46&export=download&authuser=0"
+            />
           </div>
         </div>
       </div>
