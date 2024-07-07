@@ -13,7 +13,7 @@ const Header = async ({ params }: { params: Params }) => {
   const article: Article | null = await _getOne(params.id);
   const user: User | null = await getUserById(article?.userId as string);
   return (
-    <div className="dark:bg-red-950 bg-gray-200 p-4 rounded-t-md md:h-32 h-28 relative">
+    <div className="dark:bg-[#390002] bg-grid-red-950 bg-gray-200 p-4 rounded-t-md md:h-32 h-28 relative">
       <div className="flex space-x-2 rounded-md justify-between">
         <div className="flex items-center gap-2">
           <Image
